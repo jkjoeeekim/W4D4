@@ -18,14 +18,27 @@ class Array
   end
 end
 
-
 def my_transpose(matrix)
-    new_matrix=Array.new(matrix.length){ Array.new(matrix[0].length) }
-    
-    matrix.each_with_index do |arr, idx1|
-        arr.each_with_index do |ele, idx2|
-            new_matrix[idx2][idx1]=ele
-        end
+  new_matrix = Array.new(matrix.length) { Array.new(matrix[0].length) }
+  matrix.each_with_index do |arr, idx1|
+    arr.each_with_index do |ele, idx2|
+      new_matrix[idx2][idx1] = ele
     end
-    new_matrix
+  end
+  new_matrix
+end
+
+def stock_picker(arr)
+  days = []
+  max_diff = 0
+  (0...(arr.length - 1)).each do |idx1|
+    ((idx1 + 1)...arr.length).each do |idx2|
+      diff = arr[idx2] - arr[idx1]
+      if diff > max_diff
+        max_diff = diff
+        days = [idx1, idx2]
+      end
+    end
+  end
+  days
 end

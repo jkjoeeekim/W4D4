@@ -36,27 +36,37 @@ describe Array do
   end
 end
 
-describe "#my_transpose" do
-    subject(:matrix) { [ [1,2,3], [4,5,6], [7,8,9] ] }
-    let(:new_matrix) { [ [1,4,7], [2,5,8], [3,6,9] ] }
+describe '#my_transpose' do
+  subject(:matrix) { [[1, 2, 3], [4, 5, 6], [7, 8, 9]] }
+  let(:new_matrix) { [[1, 4, 7], [2, 5, 8], [3, 6, 9]] }
 
-    before(:each) do
-        expect(matrix).not_to receive(:transpose)
-    end
+  before(:each) do
+    expect(matrix).not_to receive(:transpose)
+  end
 
-    it "should return a 2-d array" do
-        expect( my_transpose(matrix).all?{ |arr| arr.is_a?(Array)} ).to eq(true)
-        expect( my_transpose(matrix).is_a?(Array) ).to eq(true)
-    end
+  it 'should return a 2-d array' do
+    expect(my_transpose(matrix).all? { |arr| arr.is_a?(Array) }).to eq(true)
+    expect(my_transpose(matrix).is_a?(Array)).to eq(true)
+  end
 
-    it "should return a new matrix containing ele at the same index" do
-        # result=matrix.transpose
-        expect( my_transpose(matrix) ).to eq(new_matrix)
-    end
-
-
-
-
+  it 'should return a new matrix containing ele at the same index' do
+    expect(my_transpose(matrix)).to eq(new_matrix)
+  end
 end
 
+describe '#stock_picker' do
+  subject(:stock_price) { [12, 5, 13, 8, 50] }
+  subject(:stock_price2) { [100, 5, 13, 8, 50] }
 
+  it 'should return a pair of days' do
+    expect(stock_picker(stock_price).length).to eq(2)
+  end
+
+  it 'should find the most profitable pair of days' do
+    expect(stock_picker(stock_price)).to eq([1, 4])
+  end
+
+  it 'should buy the stock before you can sell' do
+    expect(stock_picker(stock_price2)).to eq([1, 4])
+  end
+end
