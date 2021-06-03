@@ -35,3 +35,28 @@ describe Array do
     end
   end
 end
+
+describe "#my_transpose" do
+    subject(:matrix) { [ [1,2,3], [4,5,6], [7,8,9] ] }
+    let(:new_matrix) { [ [1,4,7], [2,5,8], [3,6,9] ] }
+
+    before(:each) do
+        expect(matrix).not_to receive(:transpose)
+    end
+
+    it "should return a 2-d array" do
+        expect( my_transpose(matrix).all?{ |arr| arr.is_a?(Array)} ).to eq(true)
+        expect( my_transpose(matrix).is_a?(Array) ).to eq(true)
+    end
+
+    it "should return a new matrix containing ele at the same index" do
+        # result=matrix.transpose
+        expect( my_transpose(matrix) ).to eq(new_matrix)
+    end
+
+
+
+
+end
+
+
