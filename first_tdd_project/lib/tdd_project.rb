@@ -42,3 +42,12 @@ def stock_picker(arr)
   end
   days
 end
+
+
+class TowersOfHanoi
+    attr_accessor :tower
+    
+    def initialize
+        @tower=[ [1,2,3,4], [], [] ]
+    end
+end
