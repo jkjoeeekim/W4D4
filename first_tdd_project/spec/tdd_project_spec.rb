@@ -71,48 +71,70 @@ describe '#stock_picker' do
   end
 end
 
-
 describe TowersOfHanoi do
-    subject(:my_tower) { TowersOfHanoi.new }
-    let(:tower) { my_tower.tower}
-    describe '#initialize' do
-        it 'should create an array containing three arrays' do
-            expect(tower.length).to eq(3)
-        end
-
-        it 'first array should contain integers 1-4' do
-            expect(tower[0]).to eq([1,2,3,4])
-        end
-
-        it 'second and third array should be empty' do
-            expect(tower[1].empty?).to eq(true)
-            expect(tower[2].empty?).to eq(true)
-        end
+  subject(:my_tower) { TowersOfHanoi.new }
+  let(:tower) { my_tower.tower }
+  describe '#initialize' do
+    it 'should create an array containing three arrays' do
+      expect(tower.length).to eq(3)
     end
 
-    describe '#move' do
-        context 'given a valid index' do
-            it 'should move the first ele from an array to another array' do
-                new_tower=[ [2,3,4], [1], [] ]
-                my_tower.move([0,1])
-                expect(tower).to eq(new_tower)
-
-                new_tower2=[ [2,3,4], [], [1] ]
-                my_tower.move([1,2])
-                expect(tower).to eq(new_tower2)
-            end
-        end
-
-        context 'given an invalid index' do
-            it 'should raise an error if move is not valid' do
-                expect {my_tower.move([4,5])}.to raise_error('position not valid')
-            end    
-        end
-        
+    it 'first array should contain integers 1-4' do
+      expect(tower[0]).to eq([1, 2, 3, 4])
     end
 
-    describe '#won?' do
-        
+    it 'second and third array should be empty' do
+      expect(tower[1].empty?).to eq(true)
+      expect(tower[2].empty?).to eq(true)
     end
-    
+  end
+
+  describe '#move' do
+    context 'given a valid index' do
+      it 'should move the first ele from an array to another array' do
+        new_tower = [[2, 3, 4], [1], []]
+        my_tower.move([0, 1])
+        expect(tower).to eq(new_tower)
+
+        new_tower2 = [[2, 3, 4], [], [1]]
+        my_tower.move([1, 2])
+        expect(tower).to eq(new_tower2)
+      end
+    end
+
+    context 'given an invalid index' do
+      it 'should raise an error if move is not valid' do
+        expect { my_tower.move([4, 5]) }.to raise_error('position not valid')
+        expect { my_tower.move([1, 1]) }.to raise_error('position not valid')
+        expect { my_tower.move([2, 0]) }.to raise_error('position not valid')
+      end
+    end
+  end
+
+  describe '#is_valid?' do
+    context 'position is valid' do
+      it 'should return true' do
+        expect(my_tower.is_valid?([0, 2])).to be true
+        expect(my_tower.is_valid?([0, 1])).to be true
+      end
+    end
+
+    context 'position is invalid' do
+      it 'should return false' do
+        expect(my_tower.is_valid?([5, 3])).to be false
+        expect(my_tower.is_valid?([2, 1])).to be false
+      end
+    end
+  end
+
+  describe '#won?' do
+    context 'player won' do
+      it 'should return true' do
+        tower[0] = []
+        tower[1] = [1, 2, 3, 4]
+        tower[2] = []
+        expect(my_tower.won?).to be true
+      end
+    end
+  end
 end

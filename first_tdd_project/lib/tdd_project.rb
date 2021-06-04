@@ -1,3 +1,5 @@
+require 'byebug'
+
 def my_uniq(arr)
   new_arr = []
   arr.each do |ele|
@@ -43,11 +45,26 @@ def stock_picker(arr)
   days
 end
 
-
 class TowersOfHanoi
-    attr_accessor :tower
-    
-    def initialize
-        @tower=[ [1,2,3,4], [], [] ]
-    end
+  attr_accessor :tower
+
+  def initialize
+    @tower = [[1, 2, 3, 4], [], []]
+  end
+
+  def move(movement)
+    raise 'position not valid' unless is_valid?(movement)
+
+    starting, ending = movement
+    tower[ending].unshift(tower[starting].shift)
+  end
+
+  def is_valid?(movement)
+    starting, ending = movement
+    return false unless movement.all? { |idx| idx.between?(0, 2) }
+    return false if starting == ending || tower[starting].length.zero?
+
+    tower[starting].first < tower[ending].first unless tower[ending].empty?
+    true
+  end
 end
