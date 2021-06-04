@@ -138,14 +138,12 @@ describe TowersOfHanoi do
     end
 
     context 'player not won' do
-        it 'should return false' do
-            tower[0] = [2,3,4]
-            tower[1] = [1]
-            tower[2] = []
-            expect(my_tower.won?).to be false
-        end
+      it 'should return false' do
+        tower[0] = [2, 3, 4]
+        tower[1] = [1]
+        tower[2] = []
+        expect(my_tower.won?).to be false
+      end
     end
-
-
   end
 end

@@ -69,14 +69,8 @@ class TowersOfHanoi
   end
 
   def won?
-    new_tower=tower.dup
+    new_tower = tower.dup
     new_tower.shift
-    new_tower.any? { |tower| tower==[1,2,3,4] }
+    new_tower.any? { |tower| tower == [1, 2, 3, 4] }
   end
-
 end
-
-
-
-
-
