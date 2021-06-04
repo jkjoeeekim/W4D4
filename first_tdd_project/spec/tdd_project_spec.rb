@@ -45,8 +45,8 @@ describe '#my_transpose' do
   end
 
   it 'should return a 2-d array' do
-    expect(my_transpose(matrix).all? { |arr| arr.is_a?(Array) }).to eq(true)
-    expect(my_transpose(matrix).is_a?(Array)).to eq(true)
+    expect(my_transpose(matrix).all? { |arr| arr.is_a?(Array) }).to be true
+    expect(my_transpose(matrix).is_a?(Array)).to be true
   end
 
   it 'should return a new matrix containing ele at the same index' do
@@ -136,5 +136,16 @@ describe TowersOfHanoi do
         expect(my_tower.won?).to be true
       end
     end
+
+    context 'player not won' do
+        it 'should return false' do
+            tower[0] = [2,3,4]
+            tower[1] = [1]
+            tower[2] = []
+            expect(my_tower.won?).to be false
+        end
+    end
+
+
   end
 end

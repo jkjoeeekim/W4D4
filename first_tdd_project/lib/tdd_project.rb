@@ -67,4 +67,16 @@ class TowersOfHanoi
     tower[starting].first < tower[ending].first unless tower[ending].empty?
     true
   end
+
+  def won?
+    new_tower=tower.dup
+    new_tower.shift
+    new_tower.any? { |tower| tower==[1,2,3,4] }
+  end
+
 end
+
+
+
+
+
